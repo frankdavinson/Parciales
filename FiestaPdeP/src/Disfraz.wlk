@@ -46,7 +46,7 @@ class Tobara{
 		self.diaDeFiestaDe(unaPersona)
 	
 	method diaDeFiestaDe(unaPersona) = 
-	if((fecha - unaPersona.fechaFiesta()).abs()>=2)return 5 else return 3
+	if((fecha - unaPersona.fechaFiesta())>=2)return 5 else return 3
 	
 }
 

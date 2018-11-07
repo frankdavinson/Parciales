@@ -22,7 +22,11 @@ class Persona{
 	//CLASE PERSONA
 	method satisfecho() = self.puntos() > 10
 	
-	
+	method conformeConElCambio(otraPersona){
+		var intercambioDisfraz = otraPersona.traje()
+		return self.traje(intercambioDisfraz).satisfecho()
+			
+	}
 	
 
 	method tieneDisfraz() = !traje.equals(null)
