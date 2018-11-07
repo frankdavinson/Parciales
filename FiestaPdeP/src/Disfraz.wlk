@@ -4,7 +4,7 @@ import Persona.*
 class Traje{
 	var property nombre
 	var  fecha
-	var  property caracteristicas
+	var  property caracteristicas =#{}
 	constructor(unNombre,unaFecha,unaCaracteristicas){
 		nombre =unNombre
 		fecha= unaFecha

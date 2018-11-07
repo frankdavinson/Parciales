@@ -3,11 +3,17 @@ import Disfraz.*
 
 
 class Persona{
-	var personalidad
+	var property personalidad
+	var property fiesta
+	var property edad
 	var property traje
-	constructor(_personalidad,unTraje){
+	
+	
+	constructor(_personalidad,_edad,unTraje, invitadoFiesta){
 		personalidad = _personalidad
+		edad = _edad
 		traje = unTraje
+		fiesta = invitadoFiesta
 	}
 	
 	method agregarDisfraz(_disfraz) = traje.add(_disfraz)
@@ -16,14 +22,17 @@ class Persona{
 	//CLASE PERSONA
 	method satisfecho() = self.puntos() > 10
 	
-	method cambiarseTrajeCon(unaPersona)=
-		unaPersona.traje(traje)
-		
+	
+	
+
 	method tieneDisfraz() = !traje.equals(null)
+	
+	method fechaFiesta()=
+		fiesta.fecha()
 }
 
 class Caprichoso inherits Persona{
-	
+	constructor(unPersonalidad,_edad, unTraje,invitadoFiesta)=super(unPersonalidad,_edad,unTraje, invitadoFiesta)
 	override method satisfecho() = super() and self.nombreTrajeEsPar()
 	
 	method nombreTrajeEsPar() = traje.nombre().length().even() 
@@ -31,7 +40,7 @@ class Caprichoso inherits Persona{
 }
 
 class Pretencioso inherits Persona{
-	
+	constructor(unPersonalidad,_edad, unTraje,invitadoFiesta)=super(unPersonalidad,_edad,unTraje, invitadoFiesta)
 	override method satisfecho() = super() and self.trajeHechoMenosDe(30)
 	
 	method trajeHechoMenosDe(unosDias) = traje.fecha().plusDays(-unosDias) < 0
@@ -39,7 +48,7 @@ class Pretencioso inherits Persona{
 
 class Numerologo inherits Persona{
 	var puntajeDeterminado
-	constructor(unPersonalidad,unTraje,unPuntaje)=super(unPersonalidad,unTraje){
+	constructor(unPersonalidad,_edad,unTraje,invitadoFiesta, unPuntaje)=super(unPersonalidad,_edad,unTraje, invitadoFiesta){
 		puntajeDeterminado = unPuntaje
 	}
 	override method satisfecho() = self.puntos() > puntajeDeterminado

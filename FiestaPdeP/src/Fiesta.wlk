@@ -1,9 +1,9 @@
 import Persona.*
 import Personalidad.*
 import Disfraz.*
-
+class InvitadoException inherits Exception{}
 class Fiesta{
-	var fecha
+	var property fecha
 	var invitados = []
 	constructor(){}
 	constructor(unaFecha,losInvitados){
@@ -19,28 +19,34 @@ class Fiesta{
 	method puedenCambiarse(invitado,otroInvitado)=
 		self.estanEnLaMismaFiesta(invitado,otroInvitado) &&
 		self.noEstanSatisfecho(invitado,otroInvitado) &&
-		self.cambiandoseTrajes(invitado,otroInvitado)
-		
+		self.cambiandoseQuedanSatisfechos(invitado,otroInvitado)
+
 		
 	method estanEnLaMismaFiesta(invitado,otroInvitado)=
-		invitados.map({inv => inv.equals(invitado) or inv.equals(otroInvitado)})
+		invitados.contains(invitado) && invitados.contains(otroInvitado)
 		
 	
 	method noEstanSatisfecho(invitado,otroInvitado) = 
 		!invitado.satisfecho() or !otroInvitado.satisfecho()
 	
-	method cambiandoseTrajes(invitado,otroInvitado)=
-			self.pasanAEstarConformes(invitado,otroInvitado)
 		
-	method pasanAEstarConformes(invitado,otroInvitado)=
-		invitado.cambiarseTrajeCon(otroInvitado).satisfecho() &&
-		otroInvitado.cambiarseTrajeCon(invitado).satisfecho()
+	method cambiandoseQuedanSatisfechos(invitado,otroInvitado)=
+		invitado.conformeConElCambio(otroInvitado) &&
+		otroInvitado.conformeConElCambio(invitado)
 		
-		
-	method agregarAFiesta(persona)=
-		persona.tieneDisfraz() && self.noEstaInvitado(persona)
-	
+		 
 	method noEstaInvitado(persona) = !invitados.contains(persona)
+		
+	method agregarAFiesta(persona){
+		if(self.unirseALaFiesta(persona))
+			return self.agregarInvitado(persona)
+		else 
+			return console.println("NO PODES UNIRTE A LA FIESTA")	
 	
+	}
+		
+	method unirseALaFiesta(persona) = persona.tieneDisfraz() && self.noEstaInvitado(persona)
+			
 	
+	method agregarInvitado(persona) =invitados.add(persona)
 }

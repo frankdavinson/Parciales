@@ -29,15 +29,19 @@ class Cambiante inherits Personalidad{
 
 class Personalidad2{
 	var property personalidad
-
+	
+	constructor(unaPersonalidad){
+		personalidad = unaPersonalidad
+	}
+	method personalidad() = personalidad
 	method esSexy() =  personalidad.sexy()
 }
 
-class Alegre2{
+object alegre2{
 	method sexy() = false
 }
 
-class Taciturna2{
+object taciturna2{
 	var persona
 	
 	method sexy() = persona.edad()< 30
